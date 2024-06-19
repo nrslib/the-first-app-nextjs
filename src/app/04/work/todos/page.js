@@ -1,8 +1,14 @@
 "use client";
 
+import {useState} from "react";
+
 export default function Todos() {
+    const [data, setData] = useState(0)
+
     const handleAddButtonClick = event => {
-        alert("hello world")
+        alert("hello world " + data)
+        const latestData = data + 1
+        setData(latestData)
     }
 
     return (
@@ -23,21 +29,21 @@ export default function Todos() {
                     <tbody>
                     <tr>
                         <td>1</td>
-                        <td><input type="text" value="課題" /></td>
+                        <td><input type="text" value="課題"/></td>
                         <td>
                             <input type="checkbox"/>
                         </td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td><input type="text" value="買い物" /></td>
+                        <td><input type="text" value="買い物"/></td>
                         <td>
-                            <input type="checkbox" checked={false}/>
+                            <input type="checkbox" checked={true}/>
                         </td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td><input type="text" value="洗濯" /></td>
+                        <td><input type="text" value="洗濯"/></td>
                         <td>
                             <input type="checkbox" checked={false}/>
                         </td>

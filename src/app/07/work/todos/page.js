@@ -9,10 +9,35 @@ export default function Todos() {
         {id: 3, title: "洗濯", completed: false},
     ]);
 
-    const handleAddButtonClick = () => {
+    const handleAddButtonClick = event => {
         let nextId = todos.length + 1
         todos.push({id: nextId, title: "", completed: false})
         setTodos([...todos])
+    }
+
+    const handleCheckboxChange = todoId => {
+        const newTodos = todos.map(todo => {
+            if (todo.id === todoId) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+        setTodos(newTodos);
+    }
+
+    const todoRows = [];
+    for (const todo of todos) {
+        todoRows.push(
+            <Fragment key={todo.id}>
+                <tr>
+                    <td>{todo.id}</td>
+                    <td><input type="text" value={todo.title}/></td>
+                    <td>
+                        <input type="checkbox" onChange={() => handleCheckboxChange(todo.id)} checked={todo.completed}/>
+                    </td>
+                </tr>
+            </Fragment>
+        );
     }
 
     return (
@@ -31,23 +56,7 @@ export default function Todos() {
                     </tr>
                     </thead>
                     <tbody>
-                    {
-                        (
-                            todos.map(todo => {
-                                return (
-                                    <Fragment key={todo.id}>
-                                        <tr>
-                                            <td>{todo.id}</td>
-                                            <td><input type="text" value={todo.title} /></td>
-                                            <td>
-                                                <input type="checkbox" checked={todo.completed}/>
-                                            </td>
-                                        </tr>
-                                    </Fragment>
-                                )
-                            })
-                        )
-                    }
+                    {todoRows}
                     </tbody>
                 </table>
             </div>

@@ -1,8 +1,14 @@
 "use client";
 
+import {useState} from "react";
+
 export default function Todos() {
+    const [data, setData] = useState(0)
+
     const handleAddButtonClick = event => {
-        alert("hello world")
+        alert("hello world " + data)
+        const latestData = data + 1
+        setData(latestData)
     }
 
     return (

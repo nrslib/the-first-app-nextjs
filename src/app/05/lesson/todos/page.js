@@ -3,6 +3,7 @@
 import {Fragment, useState} from "react";
 
 export default function Todos() {
+    const [data, setData] = useState(0)
     const [todos, setTodos] = useState([
         {id: 1, title: "課題", completed: false},
         {id: 2, title: "買い物", completed: true},
@@ -13,6 +14,21 @@ export default function Todos() {
         let nextId = todos.length + 1
         todos.push({id: nextId, title: "", completed: false})
         setTodos([...todos])
+    }
+
+    const todoRows = [];
+    for (const todo of todos) {
+        todoRows.push(
+            <Fragment key={todo.id}>
+                <tr>
+                    <td>{todo.id}</td>
+                    <td><input type="text" value={todo.title}/></td>
+                    <td>
+                        <input type="checkbox" checked={todo.completed}/>
+                    </td>
+                </tr>
+            </Fragment>
+        );
     }
 
     return (
@@ -31,23 +47,7 @@ export default function Todos() {
                     </tr>
                     </thead>
                     <tbody>
-                    {
-                        (
-                            todos.map(todo => {
-                                return (
-                                    <Fragment key={todo.id}>
-                                        <tr>
-                                            <td>{todo.id}</td>
-                                            <td><input type="text" value={todo.title} /></td>
-                                            <td>
-                                                <input type="checkbox" checked={todo.completed}/>
-                                            </td>
-                                        </tr>
-                                    </Fragment>
-                                )
-                            })
-                        )
-                    }
+                    {todoRows}
                     </tbody>
                 </table>
             </div>
